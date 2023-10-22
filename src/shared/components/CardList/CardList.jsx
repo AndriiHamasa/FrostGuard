@@ -5,7 +5,7 @@ import { useState } from 'react';
 import BasicModal from '../Modal/Modal';
 // import BasicModal from '../Modal/Modal';
 
-const CardList = ({ cards }) => {
+const CardList = ({ cards, type, deleteCard }) => {
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState(null)
   const handleOpen = (data) => {
@@ -20,7 +20,7 @@ const CardList = ({ cards }) => {
       {cards.map((card) => (
         <Grid item key={card.user.email} xs={12} sm={6} md={4} lg={3}>
           {/* Здесь CardComponent - ваш компонент для карточки */}
-          <CardItem data={card} openModal={handleOpen} />
+          <CardItem data={card} openModal={handleOpen} type={type} deleteCard={deleteCard} />
         </Grid>
       ))}
       </Grid>
@@ -33,4 +33,6 @@ export default CardList;
 
 CardList.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.shape()),
+  type: PropTypes.string.isRequired,
+  deleteCard: PropTypes.func,
 };

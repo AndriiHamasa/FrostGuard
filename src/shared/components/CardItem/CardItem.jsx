@@ -18,7 +18,7 @@ import removeFromLocal from "../../../helpers/removeFromLocal";
 // берем текущее время, округляем вверх, потом ищем - и это будет индекс в массиве кодов, забираем код погоды, запускаем функцию, каторая определяет нужный компонент
 // берем температуру, та что current, ищем минимальную и максимаотную температуру из части массива из первых 23 элементов
 
-const CardItem = ({ data, openModal }) => {
+const CardItem = ({ data, openModal, type, deleteCard }) => {
   const [isSaved, setIsSaved] = useState(false);
   const classes = useStyles();
   const { user, weather } = data;
@@ -30,21 +30,26 @@ const CardItem = ({ data, openModal }) => {
   );
   const codeWeather = weather.current_weather.weathercode;
   const weatherDescription = getWeatherDescription(codeWeather);
-  
 
   const handleSave = () => {
     setIsSaved(!isSaved);
-    
+
     if (isSaved) {
-      removeFromLocal(data.user.email)
+      removeFromLocal(data.user.email);
     } else {
-      saveToLocal(data)
+      saveToLocal(data);
     }
-  }
+  };
+
+  // const handleDeleteCard = (mail) => {
+  //   // убераем из локала, а юзефект должен сам перерендерить
+  //   console.log('mail to delete ==>> ', mail)
+  //   removeFromLocal(mail);
+  // };
 
   const handleShowWeather = () => {
-    openModal(data)
-  }
+    openModal(data);
+  };
   return (
     <Card>
       <div className={classes.card}>
@@ -71,7 +76,7 @@ const CardItem = ({ data, openModal }) => {
         </Typography>
         <Typography variant="body1">Weather information</Typography>
 
-        <IconWeather code={codeWeather} />
+        <IconWeather code={codeWeather} size={ 64} />
         <Typography variant="body2" color="textSecondary">
           Weather description: {weatherDescription}
         </Typography>
@@ -84,10 +89,27 @@ const CardItem = ({ data, openModal }) => {
         <Typography variant="body2" color="textSecondary">
           Temperature-max: {temperatureArr.max}
         </Typography>
-        <Button variant={ !isSaved ? "contained" : "outlined"} color={ !isSaved ? "success" : "error"} onClick={handleSave}>
-          { !isSaved ? "Save" : "Remove"}
+        {type === "home" ? (
+          <Button
+            variant={!isSaved ? "contained" : "outlined"}
+            color={!isSaved ? "success" : "error"}
+            onClick={handleSave}
+          >
+            {!isSaved ? "Save" : "Remove"}
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={() => deleteCard(data.user.email)}
+          >
+            Remove
+          </Button>
+        )}
+
+        <Button color="secondary" onClick={handleShowWeather}>
+          Weather
         </Button>
-        <Button color="secondary" onClick={handleShowWeather}>Weather</Button>
         {/* <IconWeatherFog/> */}
       </CardContent>
     </Card>
@@ -99,4 +121,6 @@ export default CardItem;
 CardItem.propTypes = {
   data: PropTypes.shape(),
   openModal: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  deleteCard: PropTypes.func,
 };

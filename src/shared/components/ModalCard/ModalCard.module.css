@@ -1,0 +1,18 @@
+.smallFont {
+  font-size: 14px; /* Укажите желаемый размер шрифта */
+
+  padding-top: 15px;
+}
+
+
+
+.typographyContainer, .iconContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.iconContainer{
+  margin-top: 15px;
+  
+  /* align-items: center; */
+}

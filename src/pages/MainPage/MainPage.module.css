@@ -1,0 +1,9 @@
+.container{
+  margin-bottom: 20px;
+}
+
+.loadMoreBtn{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}

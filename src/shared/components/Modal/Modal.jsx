@@ -11,7 +11,9 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "70vw",
+  maxWidth: "500px",
+  height: "35vh",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -28,7 +30,6 @@ const BasicModal = ({ handleClose, open, modalData }) => {
     setValue(newValue);
   };
 
-  console.log("value", value);
 
   // const style = {
   //   maxWidth: { xs: 320, sm: 480 },

@@ -3,10 +3,10 @@ import { Card, CardContent, Typography } from "@mui/material";
 import IconWeather from "../IconList/IconList";
 import getWeatherDescription from "../../../helpers/getWeatherDescription";
 // import getTemperatureArr from "../../../helpers/getTemperatureArr";
+import css from "./ModalCard.module.css"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 const ModalCard = ({ data, day }) => {
   // const { temperature, weathercode } = data.weather.current_weather;
   // const currentTemperature = data.weather.current_weather.temperature;
@@ -31,30 +31,30 @@ const ModalCard = ({ data, day }) => {
   const weatherDescriptionArr = weatherCodeArr.map((code) =>
     getWeatherDescription(code)
   );
-
+  
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 2,
+    slidesToScroll: 2,
   };
 
   return (
     <Slider {...settings}>
       {currentDayTemperatureArr.map((temperature, index) => (
         <Card key={timeArr[index]}>
-          <CardContent>
-            <Typography variant="h5" component="div">
+          <CardContent style={{padding: "5px"}}>
+            <div className={css.typographyContainer}><Typography variant="p" component="div" className={css.smallFont}>
               Time: {timeArr[index]}
-            </Typography>
-            <IconWeather code={weatherCodeArr[index] } />
-            <Typography variant="h5" component="div">
+            </Typography></div>
+            <div className={css.iconContainer}><IconWeather code={weatherCodeArr[index]} size={32} /></div>
+            <div className={css.typographyContainer}><Typography variant="p" component="div" className={css.smallFont}>
               {weatherDescriptionArr[index]}
-            </Typography>
-            <Typography variant="h5" component="div">
+            </Typography></div>
+            <div className={css.typographyContainer}><Typography variant="p" component="div" className={css.smallFont}>
               {currentDayTemperatureArr[index]}
-            </Typography>
+            </Typography></div>
           </CardContent>
         </Card>
       ))}

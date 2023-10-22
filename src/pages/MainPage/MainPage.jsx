@@ -4,6 +4,7 @@ import fetchWeather from "../../assets/fetchWeather";
 import CardList from "../../shared/components/CardList/CardList";
 import Loader from "../../shared/components/Loader/Loader";
 import Button from "@mui/material/Button";
+import css from "./MainPage.module.css"
 // import LoadingIndicator from "../../shared/components/LoadingIndicator/LoadingIndicator";
 
 const MainPage = () => {
@@ -48,11 +49,10 @@ const MainPage = () => {
   // console.log('cardList ==>> ', cardList)
   return (
     <>
-      <h1>MainPage</h1>
       {cardList.length !== 0 ? (
         <>
-          <CardList cards={cardList} />
-          <Button onClick={addCards} variant="outlined">Outlined</Button>
+          <div className={css.container}><CardList cards={cardList} type="home" /></div>
+          <div className={css.loadMoreBtn}><Button onClick={addCards} variant="outlined">Load more</Button></div>
         </>
       ) : (
         <Loader />
