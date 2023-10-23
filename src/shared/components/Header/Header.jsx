@@ -33,14 +33,6 @@ const Header = () => {
           to="/saved"
           style={{ color: value === "/saved" ? "#2196F3" : "inherit" }}
         />
-        {/*  */}
-        <Tab
-          value="/map"
-          label="Map"
-          component={Link}
-          to="/map"
-          style={{ color: value === "/map" ? "#2196F3" : "inherit" }}
-        />
       </Tabs>
       
     </Toolbar>

@@ -5,7 +5,6 @@ import CardList from "../../shared/components/CardList/CardList";
 import Loader from "../../shared/components/Loader/Loader";
 import Button from "@mui/material/Button";
 import css from "./MainPage.module.css"
-// import LoadingIndicator from "../../shared/components/LoadingIndicator/LoadingIndicator";
 
 const MainPage = () => {
   const [cardList, setCardList] = useState([]);
@@ -46,7 +45,6 @@ const MainPage = () => {
     setCardList((prev) => [...prev, ...arr]);
   };
 
-  // console.log('cardList ==>> ', cardList)
   return (
     <>
       {cardList.length !== 0 ? (
@@ -57,8 +55,6 @@ const MainPage = () => {
       ) : (
         <Loader />
       )}
-      {/* <Loader /> */}
-      {/* <LoadingIndicator /> */}
     </>
   );
 };

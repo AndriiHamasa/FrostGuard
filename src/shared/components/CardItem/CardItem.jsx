@@ -14,15 +14,13 @@ import getTemperatureArr from "../../../helpers/getTemperatureArr";
 import { useState } from "react";
 import saveToLocal from "../../../helpers/saveToLocal";
 import removeFromLocal from "../../../helpers/removeFromLocal";
-
-// берем текущее время, округляем вверх, потом ищем - и это будет индекс в массиве кодов, забираем код погоды, запускаем функцию, каторая определяет нужный компонент
-// берем температуру, та что current, ищем минимальную и максимаотную температуру из части массива из первых 23 элементов
+import css from "./CardItem.module.css"
 
 const CardItem = ({ data, openModal, type, deleteCard }) => {
   const [isSaved, setIsSaved] = useState(false);
   const classes = useStyles();
   const { user, weather } = data;
-  // const currentTime = weather.current_weather.time.split('T')[1]
+
   const currentTemperature = weather.current_weather.temperature;
   const temperatureArr = getTemperatureArr(
     [...weather.hourly.temperature_2m].slice(0, 24),
@@ -41,12 +39,6 @@ const CardItem = ({ data, openModal, type, deleteCard }) => {
     }
   };
 
-  // const handleDeleteCard = (mail) => {
-  //   // убераем из локала, а юзефект должен сам перерендерить
-  //   console.log('mail to delete ==>> ', mail)
-  //   removeFromLocal(mail);
-  // };
-
   const handleShowWeather = () => {
     openModal(data);
   };
@@ -59,36 +51,41 @@ const CardItem = ({ data, openModal, type, deleteCard }) => {
           subheader={data.user.email}
         />
         <Avatar
-          // className={classes.subCardAvatar}
           alt={user.name.first}
           src={user.picture.large}
           className={classes.avatar}
         />
       </div>
       <CardContent className={classes.cardContent}>
-        <Typography variant="body1">User information</Typography>
+        
         <Typography variant="body2" color="textSecondary">
-          Gender: {user.gender}
+          Gender: <strong>{user.gender}</strong>
         </Typography>
         <Typography variant="body2" color="textSecondary">
-          Location:{" "}
-          {`${user.location.country}, ${user.location.city}, str.${user.location.street.name} ${user.location.street.number}`}
+          Location:
+          <strong>{`${user.location.country}, ${user.location.city}, str.${user.location.street.name} ${user.location.street.number}`}</strong>
         </Typography>
-        <Typography variant="body1">Weather information</Typography>
-
-        <IconWeather code={codeWeather} size={ 64} />
-        <Typography variant="body2" color="textSecondary">
-          Weather description: {weatherDescription}
+        <div className={css.centeredContainer}><Typography variant="body1">Weather information</Typography></div>
+        <div style={{display: "flex", justifyContent: "space-around"}}>
+          <div>
+            <Typography variant="body2" color="textSecondary">
+              Temperature-current: <strong>{temperatureArr.current}</strong>
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Temperature-min: <strong>{temperatureArr.min}</strong>
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Temperature-max: <strong>{temperatureArr.max}</strong>
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+          Weather description: <strong>{weatherDescription}</strong>
         </Typography>
-        <Typography variant="body2" color="textSecondary">
-          Temperature-current: {temperatureArr.current}
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          Temperature-min: {temperatureArr.min}
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          Temperature-max: {temperatureArr.max}
-        </Typography>
+          </div>
+          <IconWeather code={codeWeather} size={64} />
+        </div>
+        
+        <div className={css.centeredContainer}>
+        
         {type === "home" ? (
           <Button
             variant={!isSaved ? "contained" : "outlined"}
@@ -109,8 +106,7 @@ const CardItem = ({ data, openModal, type, deleteCard }) => {
 
         <Button color="secondary" onClick={handleShowWeather}>
           Weather
-        </Button>
-        {/* <IconWeatherFog/> */}
+        </Button></div>
       </CardContent>
     </Card>
   );

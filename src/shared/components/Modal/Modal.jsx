@@ -4,8 +4,6 @@ import { useState } from "react";
 import ModalCard from "../ModalCard/ModalCard";
 import getDates from "../../../helpers/getDates";
 
-// import { useState } from 'react';
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -26,27 +24,13 @@ const BasicModal = ({ handleClose, open, modalData }) => {
   const date = modalData.weather.current_weather.time.split("T")[0];
   const dates = getDates(date);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setValue(newValue);
   };
 
 
-  // const style = {
-  //   maxWidth: { xs: 320, sm: 480 },
-  //   bgcolor: "background.paper",
-  //   position: "absolute",
-  //   top: "50%",
-  //   left: "50%",
-  //   transform: "translate(-50%, -50%)",
-  //   width: 400,
-  //   border: "2px solid #000",
-  //   boxShadow: 24,
-  //   p: 4,
-  // }
-
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}

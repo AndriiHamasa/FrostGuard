@@ -1,11 +1,8 @@
 import css from "./SavedPage.module.css";
-
-
 import { useEffect, useState } from "react";
 import takeFromLocal from "../../helpers/takeFromLocal";
 import removeFromLocal from "../../helpers/removeFromLocal";
 import CardList from "../../shared/components/CardList/CardList";
-import Map from "../../shared/components/MapCustom/MapCustom"
 
 const SavedPage = () => {
   const [localCardList, setLocalCardList] = useState([]);
@@ -36,7 +33,6 @@ const SavedPage = () => {
       ) : (
         <CardList cards={localCardList} type="saved" deleteCard={deleteCard} />
       )}
-      <Map/>
     </div>
   );
 };

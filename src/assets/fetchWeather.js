@@ -17,4 +17,3 @@ const fetchWeather = async (userList) => {
 
 export default fetchWeather
 
-// инстанс не должен меняться, просто изначально его нужно сделать короче, а там добавлять строчку

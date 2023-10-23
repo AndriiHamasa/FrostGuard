@@ -1,12 +1,10 @@
 
 import { PropTypes } from "prop-types";
 import { weatherCodeList } from "../../../helpers/weather-code-list";
-const {sun, partlyCloudy, fog, littleRain, freezingRain, rain, snow, snowfail, snowflakes, thunderstorm} = weatherCodeList
-
-
 import {WiDaySunny, WiDayCloudyHigh, WiDayFog, WiDayRainMix, WiDaySleet, WiDaySprinkle, WiDaySnowWind, WiDayRainWind, WiDayShowers, WiDaySleetStorm} from "react-icons/wi"
 
-// sun.includes(code)
+const {sun, partlyCloudy, fog, littleRain, freezingRain, rain, snow, snowfail, snowflakes, thunderstorm} = weatherCodeList
+
 const IconWeather = ({code, size}) => {
   if (sun.includes(code)) {
     return <WiDaySunny size={size} color="#00f"/>

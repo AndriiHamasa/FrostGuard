@@ -1,10 +1,7 @@
 .smallFont {
-  font-size: 14px; /* Укажите желаемый размер шрифта */
-
+  font-size: 14px; 
   padding-top: 15px;
 }
-
-
 
 .typographyContainer, .iconContainer {
   display: flex;
@@ -13,6 +10,4 @@
 
 .iconContainer{
   margin-top: 15px;
-  
-  /* align-items: center; */
 }
