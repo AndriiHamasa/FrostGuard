@@ -3,11 +3,12 @@ import fetchUsers from "../../assets/fetchUsers";
 import fetchWeather from "../../assets/fetchWeather";
 import CardList from "../../shared/components/CardList/CardList";
 import Loader from "../../shared/components/Loader/Loader";
-import Button from "@mui/material/Button";
-import css from "./MainPage.module.css"
+import LoadingButton from '@mui/lab/LoadingButton';
+import css from "./MainPage.module.css";
 
 const MainPage = () => {
   const [cardList, setCardList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +34,7 @@ const MainPage = () => {
   }, [cardList.length]);
 
   const addCards = async () => {
+    setLoading(true)
     const userResponse = await fetchUsers();
 
     const weatherResponse = await fetchWeather(userResponse.results);
@@ -43,14 +45,27 @@ const MainPage = () => {
     }));
 
     setCardList((prev) => [...prev, ...arr]);
+    setLoading(false)
   };
 
   return (
     <>
       {cardList.length !== 0 ? (
         <>
-          <div className={css.container}><CardList cards={cardList} type="home" /></div>
-          <div className={css.loadMoreBtn}><Button onClick={addCards} variant="outlined">Load more</Button></div>
+          <div className={css.container}>
+            <CardList cards={cardList} type="home" />
+          </div>
+          <div className={css.loadMoreBtn}>
+            <LoadingButton
+              size="small"
+              onClick={addCards}
+              loading={loading}
+              loadingIndicator="Loading…"
+              variant="outlined"
+            >
+              <span>Load more</span>
+            </LoadingButton>
+          </div>
         </>
       ) : (
         <Loader />

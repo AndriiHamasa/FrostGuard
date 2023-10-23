@@ -1,6 +1,5 @@
 .scrollToTopButton {
   display: none;
-
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -12,8 +11,8 @@
   height: 40px;
   font-size: 20px;
   cursor: pointer;
-
   transition: all 0.2s ease-in-out;
+  white-space: nowrap; 
 }
 
 .scrollToTopButton:hover,
